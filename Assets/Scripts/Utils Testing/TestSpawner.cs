@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class TestSpawner : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+   [SerializeField] 
+   private Transform Spawnpont;
+   
+   [SerializeField] 
+   private GameObject prefab;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   private bool isSpawned = false;
+
+   private GameObject instantiatedObject;
+   public void SpawnMachine()
+   {
+      if (isSpawned == false)
+      { 
+         instantiatedObject = Instantiate(prefab, Spawnpont.position, Spawnpont.rotation);
+         instantiatedObject.transform.parent = Spawnpont;
+         isSpawned = true;
+      }
+      else
+      {
+         GameObject.Destroy(instantiatedObject);
+         isSpawned = false;
+      }
+      
+   }
 }
